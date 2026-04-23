@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Traffic Login</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+}
+
+/* MAIN BOX */
+.container{
+  width:800px;
+  height:500px;
+  display:flex;
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  position:relative;
+}
+
+/* LEFT SIDE */
+.left{
+  width:50%;
+  background:#0077ff;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+/* RIGHT SIDE */
+.right{
+  width:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+/* FORMS */
+form{
+  width:80%;
+  position:absolute;
+  transition:0.5s ease;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  background:#0077ff;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.switch{
+  color:#0077ff;
+  cursor:pointer;
+  font-size:14px;
+  margin-top:10px;
+}
+
+/* LOGIN DEFAULT */
+#loginForm{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* REGISTER HIDDEN */
+#registerForm{
+  opacity:0;
+  transform:translateX(100%);
+}
+
+/* SLIDE EFFECT */
+.container.active #loginForm{
+  opacity:0;
+  transform:translateX(-100%);
+}
+
+.container.active #registerForm{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* 🚦 ICON STYLE */
+.icon{
+  font-size:60px;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="icon">🚦</div>
+    <h2>SMART TRAFFIC</h2>
+    <p>AI Traffic Monitoring System</p>
+    <button onclick="toggle()">Switch</button>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+
+    <!-- LOGIN -->
+    <form id="loginForm">
+      <h3>Login</h3>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <div class="switch" onclick="toggle()">New user? Register</div>
+    </form>
+
+    <!-- REGISTER -->
+    <form id="registerForm">
+      <h3>Register</h3>
+      <input type="text" placeholder="Username" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Register</button>
+      <div class="switch" onclick="toggle()">Already user? Login</div>
+    </form>
+
+  </div>
+</div>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
