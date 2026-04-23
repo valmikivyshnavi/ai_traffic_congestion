@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    font-family: Arial;
+    color: white;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+}
+.card {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+input, button {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+button {
+    background: #2a5298;
+    color: white;
+    border: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1 style="text-align:center;">🚦 Traffic Dashboard</h1>
+
+<div class="container">
+
+<div class="card">
+<h3>Predict</h3>
+<form method="POST">
+<input type="number" name="hour" placeholder="Hour" required>
+<input type="number" name="vehicles" placeholder="Vehicles" required>
+<button type="submit">Predict</button>
+</form>
+
+{% if prediction %}
+<h3>{{ prediction }}</h3>
+{% endif %}
+</div>
+
+<div class="card">
+<canvas id="chart"></canvas>
+</div>
+
+</div>
+
+<script>
+new Chart(document.getElementById('chart'), {
+    type: 'bar',
+    data: {
+        labels: ['Morning','Noon','Evening','Night'],
+        datasets: [{
+            label: 'Traffic',
+            data: [100, 200, 500, 150]
+        }]
+    }
+});
+</script>
+
+</body>
+</html>
