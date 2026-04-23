@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Traffic Hyderabad (Real-Time)</title>
+
+  <!-- Leaflet (FREE MAP) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+    }
+
+    #top {
+      background: #111;
+      color: white;
+      padding: 12px;
+    }
+
+    #top a {
+      color: yellow;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="top">
+  🚦 Smart Traffic System (Hyderabad Real-Time) |
+  <a href="/graph">Graph</a>
+  <a href="/logout">Logout</a>
+</div>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // 🌍 Map centered on Hyderabad
+  const map = L.map('map').setView([17.3850, 78.4867], 12);
+
+  // 🗺 OpenStreetMap layer (FREE)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // 🚦 Hyderabad traffic zones
+  let areas = [
+    { name: "Hitech City (IT Hub)", lat: 17.4435, lng: 78.3772, level: "HIGH 🔴" },
+    { name: "Secunderabad Station", lat: 17.4399, lng: 78.4983, level: "HIGH 🔴" },
+    { name: "Charminar", lat: 17.3616, lng: 78.4747, level: "MEDIUM 🟡" },
+    { name: "Banjara Hills", lat: 17.4126, lng: 78.4482, level: "MEDIUM 🟡" },
+    { name: "Kukatpally", lat: 17.4948, lng: 78.3996, level: "LOW 🟢" }
+  ];
+
+  let markers = [];
+
+  // 🎨 color based on traffic
+  function getColor(level) {
+    if (level.includes("HIGH")) return "red";
+    if (level.includes("MEDIUM")) return "orange";
+    return "green";
+  }
+
+  // 📍 draw markers
+  function drawMarkers() {
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+
+    areas.forEach(area => {
+      let marker = L.circleMarker([area.lat, area.lng], {
+        radius: 10,
+        color: getColor(area.level),
+        fillOpacity: 0.8
+      }).addTo(map);
+
+      marker.bindPopup(
+        `<b>${area.name}</b><br>Traffic: ${area.level}`
+      );
+
+      markers.push(marker);
+    });
+  }
+
+  // 🔄 simulate traffic changes
+  function updateTraffic() {
+    areas = areas.map(area => {
+      let r = Math.random();
+
+      if (r > 0.66) area.level = "HIGH 🔴";
+      else if (r > 0.33) area.level = "MEDIUM 🟡";
+      else area.level = "LOW 🟢";
+
+      return area;
+    });
+
+    drawMarkers();
+  }
+
+  // 🚀 initial load
+  drawMarkers();
+
+  // 🔥 update every 5 seconds (REAL-TIME SIMULATION)
+  setInterval(updateTraffic, 5000);
+
+</script>
+
+</body>
+</html>
