@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+h1 {
+    color: #38bdf8;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.stat {
+    font-size: 30px;
+    color: #22c55e;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 90px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background: #38bdf8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0ea5e9;
+}
+
+canvas {
+    margin-top: 20px;
+    background: #0f172a;
+    border-radius: 10px;
+}
+
+.road {
+    height: 80px;
+    background: #111827;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.car {
+    width: 40px;
+    height: 20px;
+    background: #38bdf8;
+    position: absolute;
+    animation: move 5s linear infinite;
+}
+
+@keyframes move {
+    from { left: -50px; }
+    to { left: 100%; }
+}
